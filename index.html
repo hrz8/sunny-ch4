@@ -15,9 +15,9 @@
     <section id="header">
       <div class="container">
         <nav id="nav-default" class="d-flex align-items-center">
-          <p><</p>
+          <p class="back-button"><</p>
           <img class="img-fluid" src="static/images/logo.png" alt="">
-          <h2>Rock Paper Scissor</h2>
+          <h2 class="back-button">Rock Paper Scissor</h2>
         </nav>
       </div>
     </section>
@@ -27,35 +27,50 @@
         <div class="row text-center playing-box">
           <div class="col-md-5 d-flex flex-column align-items-center">
             <h3>Player 1</h3>
-            <button type="button">
-              <img class="rps" src="static/images/batu.png" alt="">
-            </button>
-            <button type="button">
-              <img class="rps" src="static/images/kertas.png" alt="">
-            </button>
-            <button type="button">
-              <img class="rps" src="static/images/gunting.png" alt="">
-            </button>
+            <div id="user">
+              <button class="choice choice-rock" type="button" data-choice="rock">
+                <img class="rps" src="static/images/batu.png" alt="">
+              </button>
+              <button class="choice choice-paper" type="button" data-choice="paper">
+                <img class="rps" src="static/images/kertas.png" alt="">
+              </button>
+              <button class="choice choice-scissor" type="button" data-choice="scissor">
+                <img class="rps" src="static/images/gunting.png" alt="">
+              </button>
+            </div>
           </div>
           <div class="col-md-2 d-flex flex-column justify-content-end text-center">
             <div id="result">
-              <p>VS</p>
+              <div id="vs">
+                <p>VS</p>
+              </div>
+              <div id="computer-wins" class="box">
+                Computer Wins
+              </div>
+              <div id="user-wins" class="box">
+                Player 1 Wins
+              </div>
+              <div id="draw" class="box">
+                Draw
+              </div>
             </div>
-            <button>
+            <button id="reset-btn">
               <img class="reset" src="static/images/refresh.png" alt="">
             </button>
           </div>
           <div class="col-md-5 d-flex flex-column align-items-center">
             <h3>Com</h3>
-            <button type="button">
-              <img class="rps" src="static/images/batu.png" alt="">
-            </button>
-            <button type="button">
-              <img class="rps" src="static/images/kertas.png" alt="">
-            </button>
-            <button type="button">
-              <img class="rps" src="static/images/gunting.png" alt="">
-            </button>
+            <div id="computer">
+              <button class="choice choice-rock" type="button" data-choice="rock" disabled>
+                <img class="rps" src="static/images/batu.png" alt="">
+              </button>
+              <button class="choice choice-rock" type="button" data-choice="paper" disabled>
+                <img class="rps" src="static/images/kertas.png" alt="">
+              </button>
+              <button class="choice choice-rock" type="button" data-choice="scissor" disabled>
+                <img class="rps" src="static/images/gunting.png" alt="">
+              </button>
+            </div>
           </div>
         </div>
       </div>

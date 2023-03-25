@@ -45,10 +45,18 @@ class Computer extends Player {
         super();
     }
 
-    roll() {
+    roll(elements) {
         const choices = Object.values(RockPaperScissor.choices);
         const randomIdx = Math.floor(Math.random() * choices.length)
         this.selected = choices[randomIdx];
+
+        elements.forEach(function(el) {
+            el.classList.remove('active');
+
+            if (el.dataset.choice === choices[randomIdx]) {
+                el.classList.add('active');
+            }
+        });
     }
 }
 
@@ -70,22 +78,17 @@ class RockPaperScissor extends Game {
         this.players[0].choose(choice);
     }
 
-    computerTurn() {
+    computerTurn(elements, result) {
         const interval = setInterval(() => {
-            this.players[1].roll();
-
-            console.log(this.players[1].selected);
-        }, 200);
+            this.players[1].roll(elements);
+        }, 100);
 
         
         setTimeout(() => {
             clearInterval(interval);
 
-            console.log('user select:', this.players[0].selected);
-            console.log('computer select:', this.players[1].selected);
-
             this.#determineResult();
-        }, 3000);
+        }, 2000);
     }
 
     #determineResult() {
@@ -122,21 +125,25 @@ class RockPaperScissor extends Game {
                     comp.selected === RockPaperScissor.choices.PAPER
                 );
 
+            document.getElementById('vs').style.display = 'none';
+
             if (computerWins) {
-                console.log('computer wins');
                 comp.score++;
                 comp.win = true;
                 user.win = false;
+
+                document.getElementById('computer-wins').style.display = 'block';
             } else if (userWins) {
-                console.log('user wins');
                 user.score++;
                 user.win = true;
                 comp.win = false;
+
+                document.getElementById('user-wins').style.display = 'block';
             } else {
-                console.log('draw');
+                document.getElementById('draw').style.display = 'block';
             }
 
-            console.log(user, comp);
+            console.log(user.score, computer.score);
         }
     }
 }
@@ -146,7 +153,34 @@ const computer = new Computer();
 
 const rps = new RockPaperScissor(user, computer);
 
-rps.userTurn(RockPaperScissor.choices.ROCK);
-rps.computerTurn();
+const buttonsRpsUser = document.querySelectorAll('#user .choice');
+const buttonsRpsComp = document.querySelectorAll('#computer .choice');
+const resetBtn = document.getElementById('reset-btn');
 
-console.log(user, computer);
+buttonsRpsUser.forEach(function(el) {
+    el.addEventListener('click', function() {
+        buttonsRpsUser.forEach(function(ele) {
+            ele.setAttribute('disabled', '');
+        });
+    
+        el.classList.add('active');
+
+        rps.userTurn(el.dataset.choice);
+        rps.computerTurn(buttonsRpsComp);
+    });
+});
+
+resetBtn.addEventListener('click', function() {
+    buttonsRpsUser.forEach(function(el) {
+        el.classList.remove('active');
+        el.removeAttribute('disabled');
+    });
+    buttonsRpsComp.forEach(function(el) {
+        el.classList.remove('active');
+    });
+
+    document.getElementById('vs').style.display = 'block';
+    document.getElementById('computer-wins').style.display = 'none';
+    document.getElementById('user-wins').style.display = 'none';
+    document.getElementById('draw').style.display = 'none';
+});

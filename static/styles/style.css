@@ -2,6 +2,12 @@ body {
     background-color: #9c835f;
 }
 
+.choice.active {
+    background-color: #d2d2d2;
+    border-radius: 20px;
+    opacity: 0.7;
+}
+
 #nav-default {
     font-size: 72px;
     color: #724c21;
@@ -46,4 +52,13 @@ img.reset {
     font-weight: 500;
     font-size: 72px;
     margin-bottom: 100px;
+}
+
+#result .box {
+    background-color: #006810;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 100px;
+    display: none;
 }
